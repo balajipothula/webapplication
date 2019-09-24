@@ -86,7 +86,6 @@ yum -y remove acl                                    \
               libcroco                               \
               libdaemon                              \
               libdhash                               \
-              libedit                                \
               libestr                                \
               libevent                               \
               libfastjson                            \
@@ -131,7 +130,6 @@ yum -y remove acl                                    \
               NetworkManager-tui                     \
               newt                                   \
               numactl-libs                           \
-              openssh-clients                        \
               openssl-pkcs11                         \
               os-prober                              \
               parted                                 \
