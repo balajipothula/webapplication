@@ -10,11 +10,11 @@
 set -e
 
 # adding new user account on ubuntu.
-useradd -m -c "WebApp Server" -s /bin/bash webapp
+useradd -m -c "WebAppServer" -s /bin/bash webapp
 
 # adding new user account on rhel.
 <<comment
-adduser -m -c "WebApp Server" -s /bin/bash webapp
+adduser -m -c "WebAppServer" -s /bin/bash webapp
 comment
 
 # deleting user password access.
