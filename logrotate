@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Author      : BALAJI POTHULA <balaji.pothula@techie.com>,
+# Date        : 31 August 2016,
+# Description : logrotate cron file, preparating log tar balls.
+
+# setting cron job.
+# crontab -e
+
+# Clear PageCache, dentries and inodes every 10 minutes.
+# */10 * * * * sync; sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches' && swapoff -a && swapon -a
+
+# running logrotate cron everyday @23:59.
+# 59 23 * * * $HOME/logrotate
+
+readonly domains=($(ls $HOME))
+readonly json=$HOME/json
+readonly today=$(date '+%Y%m%d')
+
+for domain in ${domains[@]}; do
+  if [ -d $domain ]; then
+    accesslog="$HOME/$domain/log/access.log"
+    if [ -f $accesslog ]; then
+      accessjson="$HOME/$domain/log/$today-$domain-access.json"
+      echo -e -n '[ ' > $accessjson                   && \
+      cat $HOME/$domain/log/access.log >> $accessjson && \
+      sed -i '${s/$/]/}' $accessjson                  && \
+      sed -i 's/},]/} ]/g' $accessjson
+      # truncate -s 0 $HOME/$domain/log/access.log
+    fi
+  fi
+done
